@@ -25,7 +25,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HasAdminRoleAuthenticationGuard } from './guards/hasAdminRoleAuthenticationGuard';
 import { HasAdminRoleCanLoadGuard } from './guards/hasAdminRoleCanLoadGuard';
 import { UserManagementService } from './user-management/UserManagementService';
-import { AuthModule, AuthConfiguration, OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthModule, OpenIDImplicitFlowConfiguration, OidcSecurityService } from 'angular-auth-oidc-client';
 
 @NgModule({
     imports: [
@@ -59,26 +59,28 @@ import { AuthModule, AuthConfiguration, OidcSecurityService } from 'angular-auth
 })
 
 export class AppModule {
-    constructor(public authConfiguration: AuthConfiguration) {
-        this.authConfiguration.stsServer = 'https://localhost:44363';
-        this.authConfiguration.redirect_url = 'https://localhost:44363';
+    constructor(public oidcSecurityService: OidcSecurityService) {
+
+        let openIDImplicitFlowConfiguration = new OpenIDImplicitFlowConfiguration();
+        openIDImplicitFlowConfiguration.stsServer = 'https://localhost:44363';
+        openIDImplicitFlowConfiguration.redirect_url = 'https://localhost:44363';
         // The Client MUST validate that the aud (audience) Claim contains its client_id value registered at the Issuer identified by the iss (issuer) Claim as an audience.
         // The ID Token MUST be rejected if the ID Token does not list the Client as a valid audience, or if it contains additional audiences not trusted by the Client.
-        this.authConfiguration.client_id = 'singleapp';
-        this.authConfiguration.response_type = 'id_token token';
-        this.authConfiguration.scope = 'dataEventRecords openid';
-        this.authConfiguration.post_logout_redirect_uri = 'https://localhost:44311/Unauthorized';
-        this.authConfiguration.start_checksession = false;
-        this.authConfiguration.silent_renew = true;
-        this.authConfiguration.startup_route = '/dataeventrecords/list';
+        openIDImplicitFlowConfiguration.client_id = 'singleapp';
+        openIDImplicitFlowConfiguration.response_type = 'id_token token';
+        openIDImplicitFlowConfiguration.scope = 'dataEventRecords openid';
+        openIDImplicitFlowConfiguration.post_logout_redirect_uri = 'https://localhost:44311/Unauthorized';
+        openIDImplicitFlowConfiguration.start_checksession = false;
+        openIDImplicitFlowConfiguration.silent_renew = true;
+        openIDImplicitFlowConfiguration.startup_route = '/dataeventrecords/list';
         // HTTP 403
-        this.authConfiguration.forbidden_route = '/Forbidden';
+        openIDImplicitFlowConfiguration.forbidden_route = '/Forbidden';
         // HTTP 401
-        this.authConfiguration.unauthorized_route = '/Unauthorized';
-        this.authConfiguration.log_console_warning_active = true;
-        this.authConfiguration.log_console_debug_active = false;
+        openIDImplicitFlowConfiguration.unauthorized_route = '/Unauthorized';
+        openIDImplicitFlowConfiguration.log_console_warning_active = true;
+        openIDImplicitFlowConfiguration.log_console_debug_active = false;
         // id_token C8: The iat Claim can be used to reject tokens that were issued too far away from the current time,
         // limiting the amount of time that nonces need to be stored to prevent attacks.The acceptable range is Client specific.
-        this.authConfiguration.max_id_token_iat_offset_allowed_in_seconds = 3;
+        openIDImplicitFlowConfiguration.max_id_token_iat_offset_allowed_in_seconds = 3;
     }
 }
