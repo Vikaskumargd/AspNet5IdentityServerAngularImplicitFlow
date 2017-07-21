@@ -21,16 +21,16 @@ export class DataEventRecordsService {
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
 
-        let token = this._securityService.getToken();
+        const token = this._securityService.getToken();
         if (token !== '') {
-            let tokenValue = 'Bearer ' + token;
+            const tokenValue = 'Bearer ' + token;
             this.headers.append('Authorization', tokenValue);
         }
     }
 
     public GetAll = (): Observable<DataEventRecord[]> => {
         this.setHeaders();
-        let options = new RequestOptions({ headers: this.headers, body: '' });
+        const options = new RequestOptions({ headers: this.headers, body: '' });
 
         return this._http.get(this.actionUrl, options).map(res => res.json());
     }
@@ -60,5 +60,4 @@ export class DataEventRecordsService {
             headers: this.headers
         });
     }
-
 }
