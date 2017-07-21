@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { SecureFileService } from './SecureFileService';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { Observable }       from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'securefiles',
+    selector: 'app-securefiles',
     templateUrl: 'securefiles.component.html',
     providers: [SecureFileService]
 })

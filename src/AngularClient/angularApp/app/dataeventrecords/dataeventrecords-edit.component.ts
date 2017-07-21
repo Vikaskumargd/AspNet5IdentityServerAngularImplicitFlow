@@ -7,7 +7,7 @@ import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsSer
 import { DataEventRecord } from './models/DataEventRecord';
 
 @Component({
-    selector: 'dataeventrecords-edit',
+    selector: 'app-dataeventrecords-edit',
     templateUrl: 'dataeventrecords-edit.component.html'
 })
 
@@ -37,7 +37,7 @@ export class DataEventRecordsEditComponent implements OnInit, OnDestroy   {
         console.log('IsAuthorized:' + this.isAuthorized);
 
         this.sub = this._route.params.subscribe(params => {
-            let id = +params['id']; // (+) converts string 'id' to a number
+            const id = +params['id']; // (+) converts string 'id' to a number
             if (!this.DataEventRecord) {
                 this._dataEventRecordsService.GetById(id)
                     .subscribe(data => this.DataEventRecord = data,

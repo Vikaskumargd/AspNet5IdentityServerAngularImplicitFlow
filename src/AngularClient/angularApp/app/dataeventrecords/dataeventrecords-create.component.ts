@@ -7,7 +7,7 @@ import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsSer
 import { DataEventRecord } from './models/DataEventRecord';
 
 @Component({
-    selector: 'dataeventrecords-create',
+    selector: 'app-dataeventrecords-create',
     templateUrl: 'dataeventrecords-create.component.html'
 })
 
