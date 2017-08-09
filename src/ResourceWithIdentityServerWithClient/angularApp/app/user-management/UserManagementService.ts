@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Configuration } from '../app.constants';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { OidcSecurityService } from '../auth/services/oidc.security.service';
 import { User } from './models/User';
 
 @Injectable()
