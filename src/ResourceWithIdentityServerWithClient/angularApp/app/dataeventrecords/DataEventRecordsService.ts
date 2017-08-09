@@ -31,7 +31,7 @@ export class DataEventRecordsService {
     public GetAll = (): Observable<DataEventRecord[]> => {
         this.setHeaders();
         let options = new RequestOptions({ headers: this.headers, body: '' });
-
+        console.log('url:' + this.actionUrl);
         return this._http.get(this.actionUrl, options).map(res => res.json());
     }
 

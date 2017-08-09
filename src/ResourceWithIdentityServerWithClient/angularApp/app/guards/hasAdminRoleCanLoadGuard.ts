@@ -9,13 +9,12 @@ export class HasAdminRoleCanLoadGuard implements CanLoad {
     private hasUserAdminRole = false;
 
     constructor(
-        private securityService: OidcSecurityService
+        private oidcSecurityService: OidcSecurityService
     ) {
     }
 
     canLoad(route: Route): boolean {
 
-        return true;
         //let userData = this.securityService.getUserData();
 
         //for (let i = 0; i < userData.role.length; i++) {
@@ -24,6 +23,6 @@ export class HasAdminRoleCanLoadGuard implements CanLoad {
         //    }
         //}
 
-        //return this.hasUserAdminRole && this.securityService.isAuthorized;
+        return true; //this.hasUserAdminRole && this.securityService.isAuthorized;
     }
 }
