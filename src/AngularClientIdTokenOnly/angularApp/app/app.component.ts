@@ -1,7 +1,8 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { Configuration } from './app.constants';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HomeComponent } from './home/home.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -14,15 +15,27 @@ import './app.component.css';
     templateUrl: 'app.component.html'
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+
+    isAuthorizedSubscription: Subscription;
+    isAuthorized: boolean;
 
     constructor(public securityService: OidcSecurityService) {
     }
 
     ngOnInit() {
+        this.isAuthorizedSubscription = this.securityService.getIsAuthorized().subscribe(
+            (isAuthorized: boolean) => {
+                this.isAuthorized = isAuthorized;
+            });
+
         if (window.location.hash) {
             this.securityService.authorizedCallback();
         }
+    }
+
+    ngOnDestroy(): void {
+        this.isAuthorizedSubscription.unsubscribe();
     }
 
     login() {
