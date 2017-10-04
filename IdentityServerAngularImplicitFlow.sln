@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}"
 EndProject
@@ -23,6 +23,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceWithIdentityServerWithClient", "src\ResourceWithIdentityServerWithClient\ResourceWithIdentityServerWithClient.csproj", "{37214DB4-F4B3-44A9-ABAD-1F0D63087994}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularClientIdTokenOnly", "src\AngularClientIdTokenOnly\AngularClientIdTokenOnly.csproj", "{93DB1A95-88E1-4B5C-909B-012D64350251}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Identity.MongoDB", "..\aspnet-identity-mongo\src\Microsoft.AspNetCore.Identity.MongoDB\Microsoft.AspNetCore.Identity.MongoDB.csproj", "{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{93DB1A95-88E1-4B5C-909B-012D64350251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93DB1A95-88E1-4B5C-909B-012D64350251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93DB1A95-88E1-4B5C-909B-012D64350251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,9 @@ Global
 		{1ECB5581-FFA5-4C11-A491-C85ABD962033} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
 		{37214DB4-F4B3-44A9-ABAD-1F0D63087994} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
 		{93DB1A95-88E1-4B5C-909B-012D64350251} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBEC45F6-0F96-4D12-9F8A-685793803ACA}
 	EndGlobalSection
 EndGlobal

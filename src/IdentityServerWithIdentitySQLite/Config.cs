@@ -1,61 +1,48 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using IdentityServer4;
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
+using IdentityModel;
 
 namespace QuickstartIdentityServer
 {
+    /// <summary>
+    /// Create Sample / dummy resources, clients and users to enable test
+    /// </summary>
     public class Config
     {
+        // scopes define the resources in your system
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResources.Email(), 
-                new IdentityResource("dataeventrecordsscope",new []{ "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin" , "dataEventRecords.user" } ),
-                new IdentityResource("securedfilesscope",new []{ "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user"} )
             };
         }
 
+        /// <summary>
+        /// List of Sample APIs
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
             {
-                new ApiResource("dataEventRecords")
-                {
-                    ApiSecrets =
-                    {
-                        new Secret("dataEventRecordsSecret".Sha256())
-                    },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "dataeventrecordsscope",
-                            DisplayName = "Scope for the dataEventRecords ApiResource"
-                        }
-                    },
-                    UserClaims = { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user" }
-                },
-                new ApiResource("securedFiles")
-                {
-                    ApiSecrets =
-                    {
-                        new Secret("securedFilesSecret".Sha256())
-                    },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "securedfilesscope",
-                            DisplayName = "Scope for the securedFiles ApiResource"
-                        }
-                    },
-                    UserClaims = { "role", "admin", "user", "securedFiles", "securedFiles.admin", "securedFiles.user" }
-                }
+                new ApiResource("api.sample", "My Sample API")
+                //{
+                //   UserClaims =
+                //    {
+                //       JwtClaimTypes.Profile,
+                //       JwtClaimTypes.Name,
+                //       JwtClaimTypes.Email,
+                //    }
+                //}
+                
             };
         }
 
@@ -67,104 +54,93 @@ namespace QuickstartIdentityServer
             {
                 new Client
                 {
-                    ClientName = "angularjsclient",
-                    ClientId = "angularjsclient",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
+                    ClientId = "client",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    ClientSecrets =
                     {
-                        "https://localhost:44376/authorized"
+                        new Secret("secret".Sha256())
                     },
-                    PostLogoutRedirectUris = new List<string>
-                    {
-                        "https://localhost:44346/unauthorized.html"
-                    },
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        "https://localhost:44346"
-                    },
-                    AllowedScopes = new List<string>
-                    {
-                        "openid",
-                        "email",
-                        "profile",
-                        "dataEventRecords",
-                        "dataeventrecordsscope",
-                        "securedFiles",
-                        "securedfilesscope",
-                    }
+                    AllowedScopes = { "api.sample" }
                 },
+
+                // resource owner password grant client
                 new Client
                 {
-                    ClientName = "angularclient",
-                    ClientId = "angularclient",
-                    AccessTokenType = AccessTokenType.Reference,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 300,
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
-                    {
-                        "https://localhost:44311"
+                    ClientId = "ro.client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
-                    },
-                    PostLogoutRedirectUris = new List<string>
+                    ClientSecrets =
                     {
-                        "https://localhost:44311/unauthorized",
-                        "https://localhost:44311"
+                        new Secret("secret".Sha256())
                     },
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        "https://localhost:44311",
-                        "http://localhost:44311"
-                    },
-                    AllowedScopes = new List<string>
-                    {
-                        "openid",
-                        "dataEventRecords",
-                        "dataeventrecordsscope",
-                        "securedFiles",
-                        "securedfilesscope",
-                        "role",
-                        "profile",
-                        "email"
-                    }
+                    AllowedScopes = { "api.sample" }
                 },
+
+                // OpenID Connect hybrid flow and client credentials client (MVC)
                 new Client
                 {
-                    ClientName = "angularclientidtokenonly",
-                    ClientId = "angularclientidtokenonly",
-                    AccessTokenType = AccessTokenType.Reference,
-                    AccessTokenLifetime = 120,// 120 seconds, default 60 minutes
-                    IdentityTokenLifetime = 90,
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
-                    {
-                        "https://localhost:44372"
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
-                    },
-                    PostLogoutRedirectUris = new List<string>
+                    ClientSecrets =
                     {
-                        "https://localhost:44372/Unauthorized"
+                        new Secret("secret".Sha256())
                     },
-                    AllowedCorsOrigins = new List<string>
+
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5002/" },
+                    //LogoutUri = "http://localhost:5002",
+                    
+
+                    AllowedScopes =
                     {
-                        "https://localhost:44372",
-                        "http://localhost:44372"
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api.sample"
                     },
-                    AllowedScopes = new List<string>
+                    AllowOfflineAccess = true
+                }
+            };
+        }
+
+        public static List<TestUser> GetSampleUsers()
+        {
+            return new List<TestUser>
+            {
+                new TestUser
+                {
+                    SubjectId = "818728",
+                    Username = "alice",
+                    Password = "Password.1",
+
+
+                    Claims = new List<Claim>
                     {
-                        "openid",
-                        "dataEventRecords",
-                        "dataeventrecordsscope",
-                        "securedFiles",
-                        "securedfilesscope",
-                        "role",
-                        "profile",
-                        "email"
+                        new Claim(JwtClaimTypes.Name, "Alice Smith"),
+                        new Claim(JwtClaimTypes.GivenName, "Alice"),
+                        new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                        new Claim(JwtClaimTypes.Email, "AliceSmith@test.com"),
+                        new Claim(JwtClaimTypes.WebSite, "http://alice.test.com")
                     }
-}
+                },
+                new TestUser
+                {
+                    SubjectId = "918749",
+                    Username = "bob",
+                    Password = "Password.1",
+
+                    Claims = new List<Claim>
+                    {
+                        new Claim(JwtClaimTypes.Name, "Bob Smith"),
+                        new Claim(JwtClaimTypes.GivenName, "Bob"),
+                        new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                        new Claim(JwtClaimTypes.Email, "BobSmith@test.com"),
+                        new Claim(JwtClaimTypes.WebSite, "https://bob.test.com")
+                    }
+                }
             };
         }
     }
