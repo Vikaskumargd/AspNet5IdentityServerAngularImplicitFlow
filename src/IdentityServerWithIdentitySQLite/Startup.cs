@@ -41,10 +41,11 @@ namespace IdentityServerWithAspNetIdentitySqlite
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-           
+
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //.AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.AddMvc();
             // Dependency Injection - Register the IConfigurationRoot instance mapping to our "ConfigurationOptions" class 

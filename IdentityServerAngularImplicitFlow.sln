@@ -26,6 +26,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularClientIdTokenOnly", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Identity.MongoDB", "..\aspnet-identity-mongo\src\Microsoft.AspNetCore.Identity.MongoDB\Microsoft.AspNetCore.Identity.MongoDB.csproj", "{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthTestApi", "AuthTestApi\AuthTestApi.csproj", "{BF386657-C074-42A8-AAED-05B39F05E03D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "D:\IdentityServer4.Samples-dev\IdentityServer4.Samples-dev\Quickstarts\7_JavaScriptClient\src\JavaScriptClient\JavaScriptClient.csproj", "{F3943751-1C63-456E-B26A-A4B0534F6AAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,14 @@ Global
 		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF386657-C074-42A8-AAED-05B39F05E03D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF386657-C074-42A8-AAED-05B39F05E03D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF386657-C074-42A8-AAED-05B39F05E03D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF386657-C074-42A8-AAED-05B39F05E03D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3943751-1C63-456E-B26A-A4B0534F6AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3943751-1C63-456E-B26A-A4B0534F6AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3943751-1C63-456E-B26A-A4B0534F6AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3943751-1C63-456E-B26A-A4B0534F6AAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +89,8 @@ Global
 		{37214DB4-F4B3-44A9-ABAD-1F0D63087994} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
 		{93DB1A95-88E1-4B5C-909B-012D64350251} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
 		{FD074BB3-287F-4FA0-B1AD-7F63E9C26CC0} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+		{BF386657-C074-42A8-AAED-05B39F05E03D} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
+		{F3943751-1C63-456E-B26A-A4B0534F6AAF} = {A0F6C07F-188D-4F86-B43F-4A3EAD0D2C30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBEC45F6-0F96-4D12-9F8A-685793803ACA}

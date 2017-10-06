@@ -4,13 +4,14 @@ using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity.MongoDB;
+
+//using Microsoft.AspNetCore.Identity.MongoDB;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using QuickstartIdentityServer.Quickstart.Interface;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace QuickstartIdentityServer
 {
@@ -33,7 +34,7 @@ namespace QuickstartIdentityServer
             var repository = app.ApplicationServices.GetService<IRepository>();
 
             //Resolve ASP .NET Core Identity with DI help
-            var userManager= app.ApplicationServices.GetService<UserManager<Microsoft.AspNetCore.Identity.MongoDB.IdentityUser>>();
+            var userManager= app.ApplicationServices.GetService<Microsoft.AspNetCore.Identity.UserManager<Microsoft.AspNetCore.Identity.MongoDB.IdentityUser>>();
 
             // --- Configure Classes to ignore Extra Elements (e.g. _Id) when deserializing ---
             ConfigureMongoDriver2IgnoreExtraElements();
@@ -121,7 +122,7 @@ namespace QuickstartIdentityServer
         ///   see Config.GetSampleUsers() for details.
         /// </summary>
         /// <param name="userManager"></param>
-        private static void  AddSampleUsersToMongo(UserManager<Microsoft.AspNetCore.Identity.MongoDB.IdentityUser> userManager)
+        private static void  AddSampleUsersToMongo(Microsoft.AspNetCore.Identity.UserManager<Microsoft.AspNetCore.Identity.MongoDB.IdentityUser> userManager)
         {
             var dummyUsers = Config.GetSampleUsers();
 

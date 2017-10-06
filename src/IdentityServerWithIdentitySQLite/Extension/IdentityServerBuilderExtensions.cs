@@ -6,9 +6,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using QuickstartIdentityServer.Quickstart.Interface;
 using QuickstartIdentityServer.Quickstart.Repository;
 using QuickstartIdentityServer.Quickstart.Store;
-using Microsoft.AspNetCore.Identity.MongoDB;
+//using Microsoft.AspNetCore.Identity.MongoDB;
 using MongoDB.Driver;
-//using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.MongoDB;
 
 namespace QuickstartIdentityServer.Quickstart.Extension
 {
@@ -34,7 +35,7 @@ namespace QuickstartIdentityServer.Quickstart.Extension
         /// - IRoleStore<T>
         /// ]]></remarks>
         public static IIdentityServerBuilder AddMongoDbForAspIdentity<TIdentity, TRole>(this IIdentityServerBuilder builder, IConfigurationRoot configurationRoot) where
-            TIdentity : IdentityUser where TRole : IdentityRole
+            TIdentity : Microsoft.AspNetCore.Identity.MongoDB.IdentityUser where TRole : Microsoft.AspNetCore.Identity.MongoDB.IdentityRole
         {
 
             //User Mongodb for Asp.net identity in order to get users stored
@@ -45,7 +46,7 @@ namespace QuickstartIdentityServer.Quickstart.Extension
 
 
             // Configure Asp Net Core Identity / Role to use MongoDB
-            builder.Services.AddSingleton<Microsoft.AspNetCore.Identity.IUserStore<TIdentity>>(x =>
+            builder.Services.AddSingleton<IUserStore<TIdentity>>(x =>
             {
                 var usersCollection = database.GetCollection<TIdentity>("Identity_Users");
                 IndexChecks.EnsureUniqueIndexOnNormalizedEmail(usersCollection);
@@ -53,7 +54,7 @@ namespace QuickstartIdentityServer.Quickstart.Extension
                 return new UserStore<TIdentity>(usersCollection);
             });
 
-            builder.Services.AddSingleton<Microsoft.AspNetCore.Identity.IRoleStore<TRole>>(x =>
+            builder.Services.AddSingleton<IRoleStore<TRole>>(x =>
             {
                 var rolesCollection = database.GetCollection<TRole>("Identity_Roles");
                 IndexChecks.EnsureUniqueIndexOnNormalizedRoleName(rolesCollection);

@@ -158,3 +158,5 @@ src/AngularClientIdTokenOnly/angularApp/polyfills.js
 src/AngularClientIdTokenOnly/angularApp/vendor.js
 src/AngularClientIdTokenOnly/AngularClientIdTokenOnly.csproj.user
 src/ResourceWithIdentityServerWithClient/ResourceWithIdentityServerWithClient.csproj.user
+/AuthTestApi/bin/Debug/netcoreapp2.0
+/AuthTestApi/obj
